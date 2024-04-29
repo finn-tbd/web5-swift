@@ -25,6 +25,11 @@ jobs:
     - name: Run tests
       run: swift test --enable-code-coverage
     
+    - name: debug
+      run: |
+        set -x
+        find .build | grep ".profdata"
+    
     - name: Convert the coverage data
       run: llvm-cov export -format="lcov" .build/x86_64-apple-macosx/debug/Web5PackageTests.xctest/Contents/MacOS/Web5PackageTests -instr-profile .build/x86_64-apple-macosx/debug/codecov/default.profdata > info.lcov
 
